@@ -16,6 +16,8 @@ var noOfLights int
 var noOfColours int
 
 func main() {
+	defer fmt.Println("Program quitting...")
+	
 	if len(os.Args) > 1 {
 		fmt.Println("This program only takes one argument!")
 	} else {
@@ -61,8 +63,7 @@ func main() {
 				noOfColours = coloursNoInt
 			}
 		}
-
-		defer fmt.Println("Program quitting...")
+		
 		controller.RunController(noOfLights, noOfColours)
 		time.Sleep(1 * time.Second)
 	}
