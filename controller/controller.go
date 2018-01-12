@@ -8,7 +8,6 @@ import (
 )
 
 func RunController(numLights, numColours int) {
-
 	if numLights <= 0 {
 		fmt.Println("###########################################################################")
 		fmt.Println("############################# WARNING!!! ##################################")
