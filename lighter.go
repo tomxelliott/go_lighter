@@ -16,8 +16,6 @@ var noOfLights int
 var noOfColours int
 
 func main() {
-	defer fmt.Println("Program quitting...")
-	
 	if len(os.Args) > 1 {
 		fmt.Println("This program only takes one argument!")
 	} else {
@@ -54,16 +52,22 @@ func main() {
 			if _, err := strconv.Atoi(colourNo); err != nil {
 				fmt.Println(err.Error())
 				fmt.Println("Please enter a valid number of colours:")
-			} else {
+			} else if colourInput, _ := strconv.Atoi(colourNo); colourInput == 0 {
+				fmt.Println("Please enter a number greater than ZERO (0) for your number of colours:")
+			} else if colourInput, _ := strconv.Atoi(colourNo); colourInput > noOfLights {
+				noOfColours = noOfLights
+				fmt.Println("Warning!")
+				fmt.Println("The number of colours exceeded the number of lights.")
+				fmt.Printf("The number of colours has been set to %d.\n", noOfColours)
 				validColours = true
-			}
-
-			if valid == true {
+			} else {
 				coloursNoInt, _ := strconv.Atoi(colourNo)
 				noOfColours = coloursNoInt
+				validColours = true
 			}
 		}
-		
+
+		defer fmt.Println("Program quitting...")
 		controller.RunController(noOfLights, noOfColours)
 		time.Sleep(1 * time.Second)
 	}
