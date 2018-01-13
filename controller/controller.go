@@ -8,6 +8,7 @@ import (
 )
 
 func RunController(numLights, numColours int) {
+
 	if numLights <= 0 {
 		fmt.Println("###########################################################################")
 		fmt.Println("############################# WARNING!!! ##################################")
@@ -28,15 +29,15 @@ func RunController(numLights, numColours int) {
 			fmt.Println(err.Error())
 			return
 		}
-		for x < len(colourObjs) {
+		for x < numLights {
 			t := time.Now()
 			if isOn {
 				isOn = false
 			} else {
-				fmt.Printf("%s %+v %v\n", t.In(loc).Format("02/01/06 03:04:05 PM Jan"), colourObjs[x], "ON")
+				fmt.Printf("%s %+v %v\n", t.In(loc).Format("02/01/06 03:04:05 PM Jan"), colourObjs[x%len(colourObjs)], "ON")
 				time.Sleep(1 * time.Second)
 				isOn = true
-				fmt.Printf("%s %+v %v\n", t.In(loc).Format("02/01/06 03:04:05 PM Jan"), colourObjs[x], "OFF")
+				fmt.Printf("%s %+v %v\n", t.In(loc).Format("02/01/06 03:04:05 PM Jan"), colourObjs[x%len(colourObjs)], "OFF")
 				time.Sleep(1 * time.Second)
 				isOn = false
 				x++
@@ -44,3 +45,4 @@ func RunController(numLights, numColours int) {
 		}
 	}
 }
+
